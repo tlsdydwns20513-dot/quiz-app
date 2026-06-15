@@ -1367,7 +1367,7 @@ export class VRQuizApp {
       this.sky.setAttribute('radius', '500');
       this.sky.setAttribute('material', {
         shader: 'flat',
-        src: './assets/images/scifi_room_8k.png',
+        src: './assets/images/scifi_room_4k.png',
         side: 'back'
       });
       // 전체 구체로 변경 (기존 thetaLength 제거)
@@ -3993,5 +3993,50 @@ export class VRQuizApp {
     window.setTimeout(() => {
       if (overlay) overlay.remove();
     }, 6000);
+  }
+
+  async startCameraFallbackAR() {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+      let video = document.getElementById('ar-fallback-video');
+      if (!video) {
+        video = document.createElement('video');
+        video.id = 'ar-fallback-video';
+        video.autoplay = true;
+        video.playsInline = true;
+        video.style.position = 'fixed';
+        video.style.top = '0';
+        video.style.left = '0';
+        video.style.width = '100vw';
+        video.style.height = '100vh';
+        video.style.objectFit = 'cover';
+        video.style.zIndex = '-1';
+        document.body.appendChild(video);
+      }
+      video.srcObject = stream;
+      
+      if (this.sky) this.sky.setAttribute('visible', 'false');
+      if (this.environmentRoot) this.environmentRoot.setAttribute('visible', 'false');
+      
+      document.body.style.backgroundColor = 'transparent';
+      document.documentElement.style.backgroundColor = 'transparent';
+      
+      this.isCameraFallbackAR = true;
+      document.body.dataset.xrActiveMode = 'ar';
+    } catch (e) {
+      console.error('Camera AR fallback failed:', e);
+      alert('카메라 권한이 필요합니다.');
+    }
+  }
+
+  stopCameraFallbackAR() {
+    const video = document.getElementById('ar-fallback-video');
+    if (video && video.srcObject) {
+      video.srcObject.getTracks().forEach(t => t.stop());
+      video.remove();
+    }
+    if (this.sky) this.sky.setAttribute('visible', 'true');
+    if (this.environmentRoot) this.environmentRoot.setAttribute('visible', 'true');
+    this.isCameraFallbackAR = false;
   }
 }
