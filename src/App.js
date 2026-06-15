@@ -101,26 +101,81 @@ function createFacePose(angle, y = 2.30, radius = STUDIO_RADIUS) {
 
 function createBrightSkyCampusTexture() {
   const canvas = document.createElement('canvas');
-  // 초고화질(4K) 해상도로 설정하여 VR에서 선명하게 보이도록 함
+  // 초고화질(4K) 해상도로 설정하여 VR에서 매우 선명하게 보이도록 함
   canvas.width = 4096;
   canvas.height = 2048;
   const ctx = canvas.getContext('2d');
   const width = canvas.width;
   const height = canvas.height;
+  const horizon = height * 0.52; // 수평선 위치 (가운데보다 살짝 아래)
 
-  // 아주 부드럽고 깨끗한 노을 그라디언트 (건물, 구름 없음)
-  const skyGrad = ctx.createLinearGradient(0, 0, 0, height);
+  // 1. 하늘 그라디언트 (상단)
+  const skyGrad = ctx.createLinearGradient(0, 0, 0, horizon);
   skyGrad.addColorStop(0, '#1a1129');    // 깊은 밤하늘 보라
   skyGrad.addColorStop(0.35, '#4a2545'); // 진한 자주색
   skyGrad.addColorStop(0.60, '#a3484c'); // 붉은 노을
-  skyGrad.addColorStop(0.75, '#e06f48'); // 주황색
-  skyGrad.addColorStop(0.85, '#f7a452'); // 밝은 주황
+  skyGrad.addColorStop(0.80, '#e06f48'); // 주황색
+  skyGrad.addColorStop(0.95, '#f7a452'); // 밝은 주황
   skyGrad.addColorStop(1, '#ffdf8f');    // 지평선 부근 밝은 노란빛
   
   ctx.fillStyle = skyGrad;
-  ctx.fillRect(0, 0, width, height);
+  ctx.fillRect(0, 0, width, horizon);
 
-  // 구름이나 태양 덩어리 없이 깨끗하고 선명한 그라디언트만 반환
+  // 2. 바다/호수 수면 그라디언트 (하단)
+  const waterGrad = ctx.createLinearGradient(0, horizon, 0, height);
+  waterGrad.addColorStop(0, '#c75b3e');   // 수평선 바로 아래 (반사된 짙은 주황)
+  waterGrad.addColorStop(0.15, '#82373f'); // 붉은빛 물결
+  waterGrad.addColorStop(0.40, '#351c3b'); // 어두운 보랏빛 물
+  waterGrad.addColorStop(1, '#0b0b1a');   // 깊고 어두운 밤바다
+  
+  ctx.fillStyle = waterGrad;
+  ctx.fillRect(0, horizon, width, height - horizon);
+
+  // 3. 지는 태양 (수평선 중앙)
+  // 파노라마 특성상 중앙(width/2)이 초기 정면 시야에 가까움
+  const sunX = width * 0.5;
+  const sunY = horizon;
+  
+  // 태양 빛 번짐 (하늘쪽 광채)
+  const sunGlow = ctx.createRadialGradient(sunX, sunY, 60, sunX, sunY, 800);
+  sunGlow.addColorStop(0, 'rgba(255,255,255,0.9)');
+  sunGlow.addColorStop(0.15, 'rgba(255,230,120,0.6)');
+  sunGlow.addColorStop(0.4, 'rgba(255,100,80,0.25)');
+  sunGlow.addColorStop(1, 'rgba(200,50,80,0)');
+  ctx.fillStyle = sunGlow;
+  ctx.fillRect(0, 0, width, horizon);
+
+  // 태양 본체 (반원형으로 지평선에 걸친 모습)
+  ctx.beginPath();
+  ctx.arc(sunX, sunY, 80, Math.PI, 2 * Math.PI); 
+  ctx.fillStyle = '#fffae6';
+  ctx.fill();
+
+  // 4. 수면 위 태양 반사 (윤슬 효과)
+  const reflectionGrad = ctx.createLinearGradient(0, horizon, 0, height);
+  reflectionGrad.addColorStop(0, 'rgba(255,240,160,0.85)');
+  reflectionGrad.addColorStop(0.1, 'rgba(255,160,80,0.6)');
+  reflectionGrad.addColorStop(0.3, 'rgba(200,60,60,0.2)');
+  reflectionGrad.addColorStop(1, 'rgba(0,0,0,0)');
+  
+  ctx.fillStyle = reflectionGrad;
+  // 수면에 일렁이는 빛 반사 모양 그리기
+  const rand = seededRandomStatic(2026);
+  for(let i = 0; i < 45; i++) {
+    let y = horizon + (i * i * 0.4) + rand() * 5; // 아래로 갈수록 간격 넓어짐
+    let w = 800 - i * 15 + rand() * 100; // 아래로 갈수록 반사광 폭이 좁아짐
+    let h = 3 + rand() * 4 + (i * 0.1); // 아래로 갈수록 일렁임 두께 증가
+    if(w < 20) w = 20;
+    if(y < height) {
+      ctx.fillRect(sunX - w/2, y, w, h);
+    }
+  }
+
+  // 5. 뚜렷하고 선명한 수평선 경계선 (매우 얇게)
+  ctx.fillStyle = 'rgba(20, 10, 30, 0.4)';
+  ctx.fillRect(0, horizon, width, 2);
+
+  // 구름 없이 깨끗하고 선명한 바다 노을 텍스처 반환
   return canvas.toDataURL('image/png');
 }
 
