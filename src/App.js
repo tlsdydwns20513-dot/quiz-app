@@ -99,83 +99,105 @@ function createFacePose(angle, y = 2.30, radius = STUDIO_RADIUS) {
   };
 }
 
-function createBrightSkyCampusTexture() {
-  const canvas = document.createElement('canvas');
-  // 초고화질(4K) 해상도로 설정하여 VR에서 매우 선명하게 보이도록 함
-  canvas.width = 4096;
-  canvas.height = 2048;
-  const ctx = canvas.getContext('2d');
-  const width = canvas.width;
-  const height = canvas.height;
-  const horizon = height * 0.52; // 수평선 위치 (가운데보다 살짝 아래)
+// --- 현실적이고 아름다운 바다 노을을 위한 커스텀 쉐이더 ---
+if (window.AFRAME && !window.AFRAME.shaders['ocean-sunset-sky']) {
+  window.AFRAME.registerShader('ocean-sunset-sky', {
+    schema: {},
+    vertexShader: `
+      varying vec3 vWorldPosition;
+      void main() {
+        vec4 worldPosition = modelMatrix * vec4(position, 1.0);
+        vWorldPosition = worldPosition.xyz;
+        gl_Position = projectionMatrix * viewMatrix * worldPosition;
+      }
+    `,
+    fragmentShader: `
+      varying vec3 vWorldPosition;
+      void main() {
+        vec3 dir = normalize(vWorldPosition);
+        float h = dir.y; // -1 to 1 (수직 방향)
+        
+        // 하늘 그라디언트 (고품질 렌더링)
+        vec3 topColor = vec3(0.08, 0.05, 0.15);    // 밤하늘
+        vec3 midColor = vec3(0.5, 0.15, 0.2);      // 노을 붉은빛
+        vec3 horizonColor = vec3(1.0, 0.6, 0.2);   // 밝은 주황
+        
+        vec3 color = mix(midColor, topColor, smoothstep(0.0, 0.6, h));
+        color = mix(horizonColor, color, smoothstep(0.0, 0.2, h));
+        
+        // 태양 (정면: -Z 방향)
+        float sunIntensity = dot(dir, vec3(0.0, 0.05, -1.0));
+        if (sunIntensity > 0.995) { // 태양 본체
+          color = vec3(1.0, 0.95, 0.8);
+        } else if (sunIntensity > 0.9) { // 태양 빛 번짐
+          float glow = smoothstep(0.9, 0.995, sunIntensity);
+          color += vec3(1.0, 0.5, 0.1) * glow;
+        }
+        
+        gl_FragColor = vec4(color, 1.0);
+      }
+    `
+  });
+}
 
-  // 1. 하늘 그라디언트 (상단)
-  const skyGrad = ctx.createLinearGradient(0, 0, 0, horizon);
-  skyGrad.addColorStop(0, '#1a1129');    // 깊은 밤하늘 보라
-  skyGrad.addColorStop(0.35, '#4a2545'); // 진한 자주색
-  skyGrad.addColorStop(0.60, '#a3484c'); // 붉은 노을
-  skyGrad.addColorStop(0.80, '#e06f48'); // 주황색
-  skyGrad.addColorStop(0.95, '#f7a452'); // 밝은 주황
-  skyGrad.addColorStop(1, '#ffdf8f');    // 지평선 부근 밝은 노란빛
-  
-  ctx.fillStyle = skyGrad;
-  ctx.fillRect(0, 0, width, horizon);
-
-  // 2. 바다/호수 수면 그라디언트 (하단)
-  const waterGrad = ctx.createLinearGradient(0, horizon, 0, height);
-  waterGrad.addColorStop(0, '#c75b3e');   // 수평선 바로 아래 (반사된 짙은 주황)
-  waterGrad.addColorStop(0.15, '#82373f'); // 붉은빛 물결
-  waterGrad.addColorStop(0.40, '#351c3b'); // 어두운 보랏빛 물
-  waterGrad.addColorStop(1, '#0b0b1a');   // 깊고 어두운 밤바다
-  
-  ctx.fillStyle = waterGrad;
-  ctx.fillRect(0, horizon, width, height - horizon);
-
-  // 3. 지는 태양 (수평선 중앙)
-  // 파노라마 특성상 중앙(width/2)이 초기 정면 시야에 가까움
-  const sunX = width * 0.5;
-  const sunY = horizon;
-  
-  // 태양 빛 번짐 (하늘쪽 광채)
-  const sunGlow = ctx.createRadialGradient(sunX, sunY, 60, sunX, sunY, 800);
-  sunGlow.addColorStop(0, 'rgba(255,255,255,0.9)');
-  sunGlow.addColorStop(0.15, 'rgba(255,230,120,0.6)');
-  sunGlow.addColorStop(0.4, 'rgba(255,100,80,0.25)');
-  sunGlow.addColorStop(1, 'rgba(200,50,80,0)');
-  ctx.fillStyle = sunGlow;
-  ctx.fillRect(0, 0, width, horizon);
-
-  // 태양 본체 (반원형으로 지평선에 걸친 모습)
-  ctx.beginPath();
-  ctx.arc(sunX, sunY, 80, Math.PI, 2 * Math.PI); 
-  ctx.fillStyle = '#fffae6';
-  ctx.fill();
-
-  // 4. 수면 위 태양 반사 (윤슬 효과)
-  const reflectionGrad = ctx.createLinearGradient(0, horizon, 0, height);
-  reflectionGrad.addColorStop(0, 'rgba(255,240,160,0.85)');
-  reflectionGrad.addColorStop(0.1, 'rgba(255,160,80,0.6)');
-  reflectionGrad.addColorStop(0.3, 'rgba(200,60,60,0.2)');
-  reflectionGrad.addColorStop(1, 'rgba(0,0,0,0)');
-  
-  ctx.fillStyle = reflectionGrad;
-  // 수면에 일렁이는 빛 반사 모양 그리기
-  for(let i = 0; i < 45; i++) {
-    let y = horizon + (i * i * 0.4) + Math.random() * 5; // 아래로 갈수록 간격 넓어짐
-    let w = 800 - i * 15 + Math.random() * 100; // 아래로 갈수록 반사광 폭이 좁아짐
-    let h = 3 + Math.random() * 4 + (i * 0.1); // 아래로 갈수록 일렁임 두께 증가
-    if(w < 20) w = 20;
-    if(y < height) {
-      ctx.fillRect(sunX - w/2, y, w, h);
-    }
-  }
-
-  // 5. 뚜렷하고 선명한 수평선 경계선 (매우 얇게)
-  ctx.fillStyle = 'rgba(20, 10, 30, 0.4)';
-  ctx.fillRect(0, horizon, width, 2);
-
-  // 구름 없이 깨끗하고 선명한 바다 노을 텍스처 반환
-  return canvas.toDataURL('image/png');
+if (window.AFRAME && !window.AFRAME.shaders['animated-ocean']) {
+  window.AFRAME.registerShader('animated-ocean', {
+    schema: {
+      timeMsec: {type: 'time', is: 'uniform'}
+    },
+    vertexShader: `
+      varying vec2 vUv;
+      varying vec3 vWorldPosition;
+      uniform float timeMsec;
+      void main() {
+        vUv = uv;
+        vec4 worldPosition = modelMatrix * vec4(position, 1.0);
+        
+        float time = timeMsec / 1000.0;
+        // 복합 사인파를 이용해 자연스럽게 출렁이는 물결 메쉬 애니메이션
+        float wave = sin(worldPosition.x * 2.0 + time * 1.5) * 0.08
+                   + cos(worldPosition.z * 1.5 + time * 1.2) * 0.06
+                   + sin((worldPosition.x + worldPosition.z) * 3.0 + time * 2.0) * 0.04;
+        
+        worldPosition.y += wave;
+        vWorldPosition = worldPosition.xyz;
+        gl_Position = projectionMatrix * viewMatrix * worldPosition;
+      }
+    `,
+    fragmentShader: `
+      varying vec2 vUv;
+      varying vec3 vWorldPosition;
+      uniform float timeMsec;
+      void main() {
+        float time = timeMsec / 1000.0;
+        
+        // 바다 기본 색상
+        vec3 deepWater = vec3(0.02, 0.05, 0.15);
+        vec3 shallowWater = vec3(0.15, 0.05, 0.1);
+        
+        // 물결 패턴 노이즈
+        float pattern = sin(vWorldPosition.x * 4.0 + time) * cos(vWorldPosition.z * 4.0 + time);
+        
+        // 태양의 방향과 물결이 마주보는 정도 계산 (윤슬)
+        vec3 viewDir = normalize(cameraPosition - vWorldPosition);
+        vec3 lightDir = normalize(vec3(0.0, 1.0, -5.0) - vWorldPosition); // 태양빛이 오는 방향
+        
+        // 수평선(-Z 방향)으로 갈수록 밝아지는 반사광
+        float distance = length(vWorldPosition.xz);
+        float horizonFade = smoothstep(0.0, 100.0, distance);
+        vec3 baseColor = mix(deepWater, shallowWater, horizonFade);
+        
+        // 물결 표면에 부서지는 석양빛 (윤슬)
+        float sunGlow = smoothstep(0.8, 1.0, dot(normalize(vWorldPosition), vec3(0.0, 0.0, -1.0)));
+        float sparkle = smoothstep(0.2, 1.0, pattern) * sunGlow;
+        
+        vec3 reflection = vec3(1.0, 0.5, 0.1) * sparkle * 1.5;
+        vec3 finalColor = baseColor + reflection;
+        
+        gl_FragColor = vec4(finalColor, 0.95);
+      }
+    `
+  });
 }
 
 function createTransparentStarCurtainTexture(seed = 1) {
@@ -1278,15 +1300,38 @@ export class VRQuizApp {
   }
 
   applyImmersiveSkyTexture() {
-    if (!this.sky) return;
-    this.sky.setAttribute('radius', '48');
-    // 태양(이미지 중앙)이 사용자 정면(-Z 방향)에 오도록 180도 회전
-    this.sky.setAttribute('rotation', '0 180 0');
-    this.sky.setAttribute('material', {
-      shader: 'flat',
-      src: createBrightSkyCampusTexture(),
-      side: 'back'
-    });
+    // 1. 하늘 렌더링 (커스텀 쉐이더 사용, 하프 돔 형태로 상단만 그림)
+    if (this.sky) {
+      this.sky.setAttribute('radius', '500');
+      this.sky.setAttribute('material', {
+        shader: 'ocean-sunset-sky',
+        side: 'back'
+      });
+      // 수평선 아래를 가리기 위해 반구체(thetaLength: 90) 적용
+      this.sky.setAttribute('geometry', 'primitive: sphere; radius: 500; thetaLength: 90;');
+    }
+
+    // 2. 바다 렌더링 (커스텀 쉐이더 + 무수히 많은 정점으로 출렁임 효과)
+    let ocean = this.environmentRoot.querySelector('#animated-ocean-surface');
+    if (!ocean) {
+      ocean = document.createElement('a-plane');
+      ocean.id = 'animated-ocean-surface';
+      // 바다를 거대하게 넓게 깔고, 폴리곤(세그먼트) 수를 늘려 파도 연산을 가능하게 함
+      ocean.setAttribute('width', '1000');
+      ocean.setAttribute('height', '1000');
+      ocean.setAttribute('segments-width', '150');
+      ocean.setAttribute('segments-height', '150');
+      ocean.setAttribute('rotation', '-90 0 0');
+      // 시야 높이 살짝 아래로 바다를 내림
+      ocean.setAttribute('position', '0 -1.5 0');
+      
+      ocean.setAttribute('material', {
+        shader: 'animated-ocean',
+        transparent: true
+      });
+      
+      this.environmentRoot.appendChild(ocean);
+    }
   }
 
   renderGalaxyFloor() {
