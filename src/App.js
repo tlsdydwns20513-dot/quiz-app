@@ -1253,11 +1253,12 @@ export class VRQuizApp {
 
   renderStudioEnvironment() {
     this.applyImmersiveSkyTexture();
-    this.renderImmersiveStarParticles();
-    this.renderPanoramicNebulaBand();
-    this.renderSpaceBackground();
-    this.renderGalaxyFloor();
-    this.renderSkyGalaxy();
+    // 현실적인 도심 석양 배경을 위해 기존의 우주/반짝임 효과 제거
+    // this.renderImmersiveStarParticles();
+    // this.renderPanoramicNebulaBand();
+    // this.renderSpaceBackground();
+    // this.renderGalaxyFloor();
+    // this.renderSkyGalaxy();
   }
 
   applyImmersiveSkyTexture() {
@@ -1265,7 +1266,7 @@ export class VRQuizApp {
     this.sky.setAttribute('radius', '48');
     this.sky.setAttribute('material', {
       shader: 'flat',
-      src: createBrightSkyCampusTexture(),
+      src: './assets/images/sunset_city.png',
       side: 'back'
     });
   }
