@@ -1367,7 +1367,7 @@ export class VRQuizApp {
       this.sky.setAttribute('radius', '500');
       this.sky.setAttribute('material', {
         shader: 'flat',
-        src: './assets/images/scifi_room_4k.png',
+        src: './assets/images/scifi_room_2k.png',
         side: 'back'
       });
       // 전체 구체로 변경 (기존 thetaLength 제거)
