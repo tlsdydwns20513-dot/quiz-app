@@ -1281,6 +1281,8 @@ export class VRQuizApp {
   applyImmersiveSkyTexture() {
     if (!this.sky) return;
     this.sky.setAttribute('radius', '48');
+    // 태양(이미지 중앙)이 사용자 정면(-Z 방향)에 오도록 180도 회전
+    this.sky.setAttribute('rotation', '0 180 0');
     this.sky.setAttribute('material', {
       shader: 'flat',
       src: createBrightSkyCampusTexture(),
