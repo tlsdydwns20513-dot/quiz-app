@@ -101,64 +101,26 @@ function createFacePose(angle, y = 2.30, radius = STUDIO_RADIUS) {
 
 function createBrightSkyCampusTexture() {
   const canvas = document.createElement('canvas');
-  canvas.width = 2048;
-  canvas.height = 1024;
+  // 초고화질(4K) 해상도로 설정하여 VR에서 선명하게 보이도록 함
+  canvas.width = 4096;
+  canvas.height = 2048;
   const ctx = canvas.getContext('2d');
   const width = canvas.width;
   const height = canvas.height;
 
-  // 노을(Sunset) 하늘 그라디언트 — 위는 보랏빛/어두운 파랑, 아래는 주황/따뜻한 노랑
+  // 아주 부드럽고 깨끗한 노을 그라디언트 (건물, 구름 없음)
   const skyGrad = ctx.createLinearGradient(0, 0, 0, height);
-  skyGrad.addColorStop(0, '#2b1b42');
-  skyGrad.addColorStop(0.35, '#6a3458');
-  skyGrad.addColorStop(0.65, '#de6352');
-  skyGrad.addColorStop(0.85, '#ff964f');
-  skyGrad.addColorStop(1, '#ffdf8f');
+  skyGrad.addColorStop(0, '#1a1129');    // 깊은 밤하늘 보라
+  skyGrad.addColorStop(0.35, '#4a2545'); // 진한 자주색
+  skyGrad.addColorStop(0.60, '#a3484c'); // 붉은 노을
+  skyGrad.addColorStop(0.75, '#e06f48'); // 주황색
+  skyGrad.addColorStop(0.85, '#f7a452'); // 밝은 주황
+  skyGrad.addColorStop(1, '#ffdf8f');    // 지평선 부근 밝은 노란빛
+  
   ctx.fillStyle = skyGrad;
   ctx.fillRect(0, 0, width, height);
 
-  const rand = seededRandomStatic(20260615);
-
-  // 구름 그리기 — 노을빛에 물든 부드러운 타원
-  function drawCloud(cx, cy, spread, layers) {
-    for (let l = 0; l < layers; l++) {
-      const r = rand();
-      const x = cx + (r - 0.5) * spread * 1.4;
-      const y = cy + (rand() - 0.5) * spread * 0.42;
-      const rx = spread * (0.38 + rand() * 0.52);
-      const ry = rx * (0.38 + rand() * 0.32);
-      const alpha = 0.28 + rand() * 0.38;
-      const cloudGrad = ctx.createRadialGradient(x, y, 0, x, y, rx);
-      cloudGrad.addColorStop(0, `rgba(255,180,140,${alpha})`);
-      cloudGrad.addColorStop(0.55, `rgba(255,120,100,${alpha * 0.6})`);
-      cloudGrad.addColorStop(1, 'rgba(200,80,100,0)');
-      ctx.save();
-      ctx.fillStyle = cloudGrad;
-      ctx.beginPath();
-      ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-    }
-  }
-
-  // 먼 작은 구름
-  for (let i = 0; i < 18; i++) {
-    drawCloud(rand() * width, height * (0.32 + rand() * 0.46), 80 + rand() * 120, 6);
-  }
-  // 크고 가까운 구름
-  for (let i = 0; i < 8; i++) {
-    drawCloud(rand() * width, height * (0.28 + rand() * 0.38), 160 + rand() * 200, 12);
-  }
-
-  // 지는 태양 광채 (우측 하단 지평선 부근)
-  const sunGrad = ctx.createRadialGradient(width * 0.78, height * 0.85, 0, width * 0.78, height * 0.85, 480);
-  sunGrad.addColorStop(0, 'rgba(255,255,255,0.85)');
-  sunGrad.addColorStop(0.18, 'rgba(255,220,120,0.55)');
-  sunGrad.addColorStop(0.48, 'rgba(255,100,80,0.22)');
-  sunGrad.addColorStop(1, 'rgba(200,50,80,0)');
-  ctx.fillStyle = sunGrad;
-  ctx.fillRect(0, 0, width, height);
-
+  // 구름이나 태양 덩어리 없이 깨끗하고 선명한 그라디언트만 반환
   return canvas.toDataURL('image/png');
 }
 
@@ -1266,7 +1228,7 @@ export class VRQuizApp {
     this.sky.setAttribute('radius', '48');
     this.sky.setAttribute('material', {
       shader: 'flat',
-      src: './assets/images/sunset_city.png',
+      src: createBrightSkyCampusTexture(),
       side: 'back'
     });
   }
