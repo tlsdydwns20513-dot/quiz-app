@@ -1,4 +1,4 @@
-import {VRQuizApp} from './App.js?v=20260615-white-scifi';
+import {VRQuizApp} from './App.js?v=20260615-scifi-8k';
 
 const root = document.querySelector('#app');
 const config = window.VR_QUIZ_CONFIG || {};

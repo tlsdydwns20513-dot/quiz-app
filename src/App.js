@@ -911,31 +911,47 @@ export class VRQuizApp {
     const vrButton = document.querySelector('#enter-vr-button');
     const arButton = document.querySelector('#enter-ar-button');
 
+    // A-Frame 기본 버튼이 동작하도록 두되, AR은 커스텀으로 WebRTC 폴백을 지원하게 함
     vrButton?.addEventListener('click', () => {
       document.body.dataset.xrRequestedMode = 'vr';
+      if (this.scene.hasLoaded) {
+        this.scene.enterVR();
+      }
     });
-    arButton?.addEventListener('click', () => {
+    
+    arButton?.addEventListener('click', async () => {
       document.body.dataset.xrRequestedMode = 'ar';
+      // 1. WebXR AR 시도
+      if (this.scene.systems.webxr && this.scene.systems.webxr.sessionSupported) { // 대략적인 지원 여부
+        try {
+          await this.scene.enterVR(true); // enterAR in older versions, or enterVR(true)
+          return;
+        } catch (e) {
+          console.log("WebXR AR failed, falling back to WebRTC camera", e);
+        }
+      }
+      // 2. WebXR 불가 시 WebRTC 카메라 연동 폴백 (PC/일반 모바일 웹용)
+      this.startCameraFallbackAR();
     });
 
     const syncButtonSupport = () => {
+      // 모든 버튼을 무조건 활성화 상태로 유지
       [
         {button: vrButton, mode: 'vr'},
         {button: arButton, mode: 'ar'}
       ].forEach(({button, mode}) => {
         if (!button) return;
-        const supported = !button.classList.contains('a-hidden');
+        button.classList.remove('a-hidden');
+        button.style.display = 'flex';
         const label = button.querySelector('.xr-entry-label');
         if (label) {
           if (!label.dataset.defaultText) label.dataset.defaultText = label.textContent;
-          label.textContent = supported ? label.dataset.defaultText : `${mode.toUpperCase()} 미지원`;
+          label.textContent = label.dataset.defaultText;
         }
-        button.disabled = !supported;
-        button.dataset.xrSupported = String(supported);
-        button.setAttribute('aria-disabled', String(!supported));
-        button.title = supported
-          ? `${mode.toUpperCase()} 모드로 진입합니다.`
-          : `이 브라우저 또는 기기에서는 ${mode.toUpperCase()} 모드 진입을 지원하지 않습니다.`;
+        button.disabled = false;
+        button.dataset.xrSupported = 'true';
+        button.removeAttribute('aria-disabled');
+        button.title = `${mode.toUpperCase()} 모드로 진입합니다.`;
       });
     };
 
@@ -945,6 +961,7 @@ export class VRQuizApp {
     });
     window.setTimeout(syncButtonSupport, 300);
     window.setTimeout(syncButtonSupport, 1200);
+    window.setInterval(syncButtonSupport, 2000);
 
     this.scene.addEventListener('enter-vr', () => {
       const mode = this.scene.is('ar-mode') ? 'ar' : 'vr';
@@ -1348,11 +1365,9 @@ export class VRQuizApp {
     // 1. 화이트톤 실내 360 파노라마 적용 (전체 돔)
     if (this.sky) {
       this.sky.setAttribute('radius', '500');
-      // 기존 쉐이더 설정 제거 및 이미지 src 지정
-      this.sky.removeAttribute('material');
       this.sky.setAttribute('material', {
         shader: 'flat',
-        src: './assets/images/white_scifi_room.png',
+        src: './assets/images/scifi_room_8k.png',
         side: 'back'
       });
       // 전체 구체로 변경 (기존 thetaLength 제거)
