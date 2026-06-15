@@ -61,7 +61,7 @@
     }
   },
   "introVideo": {
-    "enabled": true,
+    "enabled": false,
     "type": "youtube",
     "url": "https://www.youtube.com/embed/hShY6xZWAYk",
     "title": "AI 시대의 교육, 무엇이 달라지나?",
