@@ -160,11 +160,10 @@ function createBrightSkyCampusTexture() {
   
   ctx.fillStyle = reflectionGrad;
   // 수면에 일렁이는 빛 반사 모양 그리기
-  const rand = seededRandomStatic(2026);
   for(let i = 0; i < 45; i++) {
-    let y = horizon + (i * i * 0.4) + rand() * 5; // 아래로 갈수록 간격 넓어짐
-    let w = 800 - i * 15 + rand() * 100; // 아래로 갈수록 반사광 폭이 좁아짐
-    let h = 3 + rand() * 4 + (i * 0.1); // 아래로 갈수록 일렁임 두께 증가
+    let y = horizon + (i * i * 0.4) + Math.random() * 5; // 아래로 갈수록 간격 넓어짐
+    let w = 800 - i * 15 + Math.random() * 100; // 아래로 갈수록 반사광 폭이 좁아짐
+    let h = 3 + Math.random() * 4 + (i * 0.1); // 아래로 갈수록 일렁임 두께 증가
     if(w < 20) w = 20;
     if(y < height) {
       ctx.fillRect(sunX - w/2, y, w, h);

@@ -1,4 +1,4 @@
-import {VRQuizApp} from './App.js?v=20260615-ocean-sunset-v2';
+import {VRQuizApp} from './App.js?v=20260615-ocean-sunset-v3';
 
 const root = document.querySelector('#app');
 const config = window.VR_QUIZ_CONFIG || {};
