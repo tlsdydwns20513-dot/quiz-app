@@ -42,13 +42,13 @@ const CLASSROOM_ANCHOR_RESET_FLAGS = ['resetAnchor', 'resetClassroomAnchor'];
 const CLASSROOM_PANEL_Y = 2.30;
 const CLASSROOM_CAPTURE_RADIUS = 3.58;
 const CLASSROOM_PANEL_SEQUENCE = [
-  {id: 'engaging', type: 'domain', label: 'Engaging', title: 'AI와 상호작용하기'},
-  {id: 'creating', type: 'domain', label: 'Creating', title: 'AI로 창작하기'},
-  {id: 'managing', type: 'domain', label: 'Managing', title: 'AI 관리하기'},
-  {id: 'designing', type: 'domain', label: 'Designing', title: 'AI 설계하기'},
-  {id: 'report', type: 'utility', label: 'Report', title: '결과 리포트'},
-  {id: 'framework', type: 'utility', label: 'AI Literacy', title: 'OECD AI 리터러시'},
-  {id: 'survey', type: 'utility', label: 'Survey', title: '설문조사'}
+  {id: 'engaging', type: 'domain', label: 'Understanding', title: 'AI 교육 이해하기'},
+  {id: 'creating', type: 'domain', label: 'Learning', title: 'AI로 함께 배우기'},
+  {id: 'managing', type: 'domain', label: 'Applying', title: 'AI 교육 활용하기'},
+  {id: 'designing', type: 'domain', label: 'Designing', title: 'AI 교육의 미래 설계'},
+  {id: 'report', type: 'utility', label: 'Report', title: '역량 리포트'},
+  {id: 'framework', type: 'utility', label: 'AI Education', title: 'AI 교육 탐구'},
+  {id: 'survey', type: 'utility', label: 'Survey', title: '성찰 설문'}
 ];
 const DEFAULT_MISSION_ORDER = ['framework', 'engaging', 'creating', 'managing', 'designing', 'report', 'survey'];
 const STUDIO_RADIUS = 2.82;
@@ -415,13 +415,13 @@ function registerXrVisibilityComponents() {
 }
 
 const STUDIO_FACES = {
-  progress: {...createFacePose(0, 2.30, STATION_ARC_RADIUS), label: 'Progress', zone: '진행률 / 리포트', accentKey: 'navy'},
-  framework: {...createFacePose(-42, 2.30, STATION_ARC_RADIUS), label: 'OECD', zone: 'OECD AI 리터러시', accentKey: 'framework'},
-  managing: {...createFacePose(-84, 2.30, STATION_ARC_RADIUS), label: 'Managing', zone: 'AI 관리하기', accentKey: 'success'},
-  engaging: {...createFacePose(-126, 2.30, STATION_ARC_RADIUS), label: 'Engaging', zone: 'AI와 상호작용하기', accentKey: 'sky'},
-  creating: {...createFacePose(42, 2.30, STATION_ARC_RADIUS), label: 'Creating', zone: 'AI로 창작하기', accentKey: 'violet'},
-  designing: {...createFacePose(84, 2.30, STATION_ARC_RADIUS), label: 'Designing', zone: 'AI 설계하기', accentKey: 'warning'},
-  survey: {...createFacePose(126, 2.30, STATION_ARC_RADIUS), label: 'Survey', zone: '설문조사', accentKey: 'mint'}
+  progress: {...createFacePose(0, 2.30, STATION_ARC_RADIUS), label: 'Progress', zone: '역량 리포트', accentKey: 'navy'},
+  framework: {...createFacePose(-42, 2.30, STATION_ARC_RADIUS), label: 'AI Edu', zone: 'AI 교육 탐구', accentKey: 'framework'},
+  managing: {...createFacePose(-84, 2.30, STATION_ARC_RADIUS), label: 'Applying', zone: 'AI 교육 활용하기', accentKey: 'success'},
+  engaging: {...createFacePose(-126, 2.30, STATION_ARC_RADIUS), label: 'Understanding', zone: 'AI 교육 이해하기', accentKey: 'sky'},
+  creating: {...createFacePose(42, 2.30, STATION_ARC_RADIUS), label: 'Learning', zone: 'AI로 함께 배우기', accentKey: 'violet'},
+  designing: {...createFacePose(84, 2.30, STATION_ARC_RADIUS), label: 'Designing', zone: 'AI 교육의 미래 설계', accentKey: 'warning'},
+  survey: {...createFacePose(126, 2.30, STATION_ARC_RADIUS), label: 'Survey', zone: '성찰 설문', accentKey: 'mint'}
 };
 
 const STUDIO_FACE_ORDER = ['progress', 'creating', 'designing', 'survey', 'engaging', 'managing', 'framework'];
@@ -462,14 +462,14 @@ const SECTION_POSES = {
 };
 
 const DEFAULT_THEME = {
-  contentTitle: 'AI 리터러시 측정 퀴즈',
-  heroTitle: 'AI 리터러시 측정 퀴즈',
-  heroSubtitle: '',
+  contentTitle: 'AI 교육 탐구 퀴즈',
+  heroTitle: 'AI 교육 탐구 퀴즈',
+  heroSubtitle: 'AI 시대, 우리는 어떻게 배우고 가르칠까요?',
   schoolName: '',
   subtitle: '',
-  startGuide: '',
-  startButtonText: '시작하기',
-  resultTitle: 'AI Literacy 결과 리포트',
+  startGuide: '영상을 먼저 시청한 뒤 4가지 AI 교육 공간을 탐험하세요.',
+  startButtonText: '탐구 시작',
+  resultTitle: 'AI 교육 역량 리포트',
   palette: {
     surface: '#eef6fb',
     surfaceElevated: '#f8fbff',
@@ -491,9 +491,9 @@ const DEFAULT_THEME = {
     panelStyle: 'cleanFlat'
   },
   domains: {
-    engaging: {accent: '#2563eb', icon: 'AI', shortLabel: '인식'},
-    creating: {accent: '#8b5cf6', icon: 'CREATE', shortLabel: '창작'},
-    managing: {accent: '#16a34a', icon: 'GUIDE', shortLabel: '관리'},
+    engaging: {accent: '#2563eb', icon: 'KNOW', shortLabel: '이해'},
+    creating: {accent: '#8b5cf6', icon: 'LEARN', shortLabel: '학습'},
+    managing: {accent: '#16a34a', icon: 'APPLY', shortLabel: '활용'},
     designing: {accent: '#f97316', icon: 'BUILD', shortLabel: '설계'}
   },
   introVideo: {

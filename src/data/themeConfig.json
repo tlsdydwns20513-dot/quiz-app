@@ -1,14 +1,14 @@
 {
-  "contentTitle": "AI 리터러시 탐구 퀴즈",
-  "heroTitle": "AI 리터러시 탐구 퀴즈",
-  "heroSubtitle": "영상을 보고 4가지 초능력을 확인하세요!",
+  "contentTitle": "AI 교육 탐구 퀴즈",
+  "heroTitle": "AI 교육 탐구 퀴즈",
+  "heroSubtitle": "AI 시대, 우리는 어떻게 배우고 가르칠까요?",
   "schoolName": "",
   "subtitle": "",
-  "startGuide": "영상을 먼저 시청한 뒤 시작해 주세요.",
-  "startButtonText": "퀴즈 시작",
-  "progressTitle": "AI Literacy Studio Progress",
-  "resultTitle": "AI Literacy 결과 리포트",
-  "resultFooter": "강점은 더 확장하고, 보완 영역은 동영상을 다시 보며 도전해 보세요.",
+  "startGuide": "영상을 먼저 시청한 뒤 4가지 AI 교육 탐구 공간을 탐험하세요.",
+  "startButtonText": "탐구 시작",
+  "progressTitle": "AI 교육 탐구 Progress",
+  "resultTitle": "AI 교육 역량 리포트",
+  "resultFooter": "AI 교육 역량을 키워 미래 학습의 주인공이 되세요. 부족한 영역은 다시 탐험해 보세요!",
   "palette": {
     "surface": "#eef6fb",
     "surfaceElevated": "#f8fbff",
@@ -38,20 +38,20 @@
     "engaging": {
       "accent": "#2563eb",
       "accentSoft": "#dbeafe",
-      "icon": "AI",
-      "shortLabel": "인식"
+      "icon": "KNOW",
+      "shortLabel": "이해"
     },
     "creating": {
       "accent": "#8b5cf6",
       "accentSoft": "#ede9fe",
-      "icon": "CREATE",
-      "shortLabel": "창작"
+      "icon": "LEARN",
+      "shortLabel": "학습"
     },
     "managing": {
       "accent": "#16a34a",
       "accentSoft": "#dcfce7",
-      "icon": "GUIDE",
-      "shortLabel": "관리"
+      "icon": "APPLY",
+      "shortLabel": "활용"
     },
     "designing": {
       "accent": "#f97316",
@@ -62,12 +62,12 @@
   },
   "introVideo": {
     "enabled": true,
-    "type": "mp4",
-    "url": "./assets/videos/ai-literacy-4-superpowers.mp4",
-    "title": "AI를 다루는 4가지 초능력",
+    "type": "youtube",
+    "url": "https://www.youtube.com/embed/hShY6xZWAYk",
+    "title": "AI 시대의 교육, 무엇이 달라지나?",
     "kicker": "📹 사전 영상 시청",
-    "description": "먼저 영상을 끝까지 시청해 주세요. 영상에서 배운 내용을 바탕으로 퀴즈를 풀게 됩니다!",
-    "confirmText": "영상 다 봤어요! 퀴즈 시작",
+    "description": "먼저 영상을 끝까지 시청해 주세요. AI 교육의 변화와 가능성을 이해한 뒤 퀴즈를 풀게 됩니다!",
+    "confirmText": "영상 다 봤어요! 탐구 시작",
     "requiredBeforeQuiz": true
   },
   "arMission": {
