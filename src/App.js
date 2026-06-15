@@ -99,7 +99,7 @@ function createFacePose(angle, y = 2.30, radius = STUDIO_RADIUS) {
   };
 }
 
-// --- 오후 4~5시 황금빛 석양과 진짜 같은 바다 윤슬을 위한 커스텀 쉐이더 ---
+// --- 진짜 사진 같은 오렌지빛 석양과 수많은 잔물결 윤슬을 위한 커스텀 쉐이더 ---
 if (window.AFRAME && !window.AFRAME.shaders['ocean-sunset-sky']) {
   window.AFRAME.registerShader('ocean-sunset-sky', {
     schema: {},
@@ -117,26 +117,27 @@ if (window.AFRAME && !window.AFRAME.shaders['ocean-sunset-sky']) {
         vec3 dir = normalize(vWorldPosition);
         float h = dir.y; // -1 to 1 (수직 방향)
         
-        // 오후 4-5시 하늘 색상 (밝고 따뜻한 황금빛)
-        vec3 topColor = vec3(0.15, 0.45, 0.85);    // 맑고 깊은 파란색
-        vec3 midColor = vec3(0.55, 0.65, 0.85);    // 부드러운 하늘색
-        vec3 horizonColor = vec3(1.0, 0.75, 0.3);  // 황금빛 밝은 오렌지 (오후의 태양빛)
+        // 첨부해주신 사진 느낌의 얕은 오렌지/살구빛 하늘 그라디언트
+        vec3 topColor = vec3(0.75, 0.5, 0.35);     // 상단: 부드러운 살구색/주황빛
+        vec3 midColor = vec3(0.9, 0.65, 0.35);     // 중간: 따뜻한 주황색
+        vec3 horizonColor = vec3(1.0, 0.9, 0.5);   // 수평선: 눈부신 밝은 노란빛
         
-        vec3 color = mix(midColor, topColor, smoothstep(0.1, 0.8, h));
+        vec3 color = mix(midColor, topColor, smoothstep(0.1, 0.7, h));
         color = mix(horizonColor, color, smoothstep(0.0, 0.25, h));
         
-        // 태양 위치 (오후 시간이므로 수평선보다 살짝 위에 위치)
-        vec3 sunDir = normalize(vec3(0.0, 0.12, -1.0));
+        // 태양 위치 (수평선에 가깝게)
+        vec3 sunDir = normalize(vec3(0.0, 0.08, -1.0));
         float sunIntensity = dot(dir, sunDir);
         
-        if (sunIntensity > 0.998) { // 태양 본체 (작고 뚜렷하게)
-          color = vec3(1.0, 0.98, 0.9);
-        } else if (sunIntensity > 0.95) { // 강력한 빛 번짐 (후광)
-          float glow = smoothstep(0.95, 0.998, sunIntensity);
-          color += vec3(1.0, 0.8, 0.4) * pow(glow, 2.0) * 1.5;
-        } else if (sunIntensity > 0.6) { // 넓은 하늘 산란
-          float glow = smoothstep(0.6, 0.95, sunIntensity);
-          color += vec3(1.0, 0.6, 0.2) * glow * 0.4;
+        // 사진처럼 작고 뚜렷하게 빛나는 흰/노란색 태양 본체
+        if (sunIntensity > 0.9995) { 
+          color = vec3(1.0, 1.0, 0.95);
+        } else if (sunIntensity > 0.99) { // 좁고 강렬한 빛 번짐
+          float glow = smoothstep(0.99, 0.9995, sunIntensity);
+          color += vec3(1.0, 0.8, 0.3) * glow * 1.2;
+        } else if (sunIntensity > 0.9) { // 넓게 퍼지는 주황빛 후광
+          float glow = smoothstep(0.9, 0.99, sunIntensity);
+          color += vec3(0.8, 0.4, 0.1) * glow * 0.4;
         }
         
         gl_FragColor = vec4(color, 1.0);
@@ -154,13 +155,14 @@ if (window.AFRAME && !window.AFRAME.shaders['animated-ocean']) {
       varying vec3 vWorldPosition;
       uniform float timeMsec;
       
-      // 진짜 파도처럼 겹치는 사인파 함수
+      // 진짜 바다 표면처럼 복잡하고 자잘하게 겹치는 파도
       float calculateWave(vec2 pos, float time) {
         float wave = 0.0;
-        wave += sin(pos.x * 0.4 + time * 1.0) * 0.18; // 큰 파도
-        wave += sin((pos.x * 0.7 + pos.y * 0.7) * 1.2 + time * 1.5) * 0.12; // 엇갈리는 파도
-        wave += sin((pos.x * -0.5 + pos.y * 0.8) * 2.5 + time * 2.0) * 0.05; // 중간 잔물결
-        wave += sin((pos.x * 1.2 + pos.y * 0.3) * 4.0 + time * 3.0) * 0.02; // 자잘한 표면 물결
+        wave += sin(pos.x * 0.5 + pos.y * 0.8 + time * 1.0) * 0.15; // 기본 파도
+        wave += sin(pos.x * -0.3 + pos.y * 2.5 + time * 1.5) * 0.05; // 중간 파도
+        // 사진처럼 가로로 길게 늘어지는 잔물결 (y축 주파수를 높임)
+        wave += sin(pos.x * 0.8 + pos.y * 5.0 + time * 2.2) * 0.02; 
+        wave += sin(pos.x * -0.5 + pos.y * 10.0 + time * 3.0) * 0.01;
         return wave;
       }
 
@@ -178,12 +180,16 @@ if (window.AFRAME && !window.AFRAME.shaders['animated-ocean']) {
       varying vec3 vWorldPosition;
       uniform float timeMsec;
       
-      float calculateWave(vec2 pos, float time) {
+      // 프래그먼트 쉐이더용 초정밀 잔물결 함수 (더 많은 디테일)
+      float calculateDetailedWave(vec2 pos, float time) {
         float wave = 0.0;
-        wave += sin(pos.x * 0.4 + time * 1.0) * 0.18;
-        wave += sin((pos.x * 0.7 + pos.y * 0.7) * 1.2 + time * 1.5) * 0.12;
-        wave += sin((pos.x * -0.5 + pos.y * 0.8) * 2.5 + time * 2.0) * 0.05;
-        wave += sin((pos.x * 1.2 + pos.y * 0.3) * 4.0 + time * 3.0) * 0.02;
+        wave += sin(pos.x * 0.5 + pos.y * 0.8 + time * 1.0) * 0.15;
+        wave += sin(pos.x * -0.3 + pos.y * 2.5 + time * 1.5) * 0.05;
+        wave += sin(pos.x * 0.8 + pos.y * 5.0 + time * 2.2) * 0.02;
+        wave += sin(pos.x * -0.5 + pos.y * 10.0 + time * 3.0) * 0.01;
+        // 윤슬을 쪼개기 위한 아주 미세한 고주파 노이즈 파동
+        wave += sin(pos.x * 1.5 + pos.y * 25.0 + time * 4.0) * 0.005;
+        wave += sin(pos.x * -2.0 + pos.y * 40.0 + time * 5.0) * 0.002;
         return wave;
       }
 
@@ -191,48 +197,47 @@ if (window.AFRAME && !window.AFRAME.shaders['animated-ocean']) {
         float time = timeMsec / 1000.0;
         vec2 pos = vWorldPosition.xz;
         
-        // 1. 노말(법선) 벡터 계산을 통해 빛이 반사되는 각도(윤슬)를 정밀하게 연산
-        float eps = 0.05;
-        float h0 = calculateWave(pos, time);
-        float hX = calculateWave(pos + vec2(eps, 0.0), time);
-        float hZ = calculateWave(pos + vec2(0.0, eps), time);
-        // 물결의 경사도에 따라 법선 벡터 생성
-        vec3 normal = normalize(vec3(h0 - hX, eps * 1.5, h0 - hZ));
+        // 1. 노말(법선) 벡터 계산을 통해 자잘한 윤슬 표면 생성
+        float eps = 0.02; // 샘플링 간격을 줄여 더 날카로운 물결 질감 생성
+        float h0 = calculateDetailedWave(pos, time);
+        float hX = calculateDetailedWave(pos + vec2(eps, 0.0), time);
+        float hZ = calculateDetailedWave(pos + vec2(0.0, eps), time);
+        vec3 normal = normalize(vec3(h0 - hX, eps * 1.0, h0 - hZ));
         
-        // 2. 시선 벡터 및 태양빛 벡터 설정
+        // 2. 시선 벡터 및 태양빛 벡터 (하늘 쉐이더와 동일한 방향)
         vec3 viewDir = normalize(cameraPosition - vWorldPosition);
-        vec3 lightDir = normalize(vec3(0.0, 0.12, -1.0)); // 오후 4-5시 태양 방향
+        vec3 lightDir = normalize(vec3(0.0, 0.08, -1.0));
         
-        // 3. 바다 고유의 색상 (오후 햇살을 받아 살짝 에메랄드/밝은 푸른빛이 도는 바다)
-        vec3 waterDeepColor = vec3(0.05, 0.2, 0.35);
-        vec3 waterBaseColor = vec3(0.1, 0.35, 0.5);
+        // 3. 사진과 유사한 바다 색상 (너무 파랗지 않고 주황/갈색빛을 머금은 얕은 색감)
+        vec3 waterDeepColor = vec3(0.25, 0.20, 0.15); // 하늘빛을 잃은 어두운 물색
+        vec3 waterBaseColor = vec3(0.40, 0.30, 0.20); // 노을빛을 머금은 물색
         
-        // 4. 빛 반사 계산 (Specular & Fresnel)
+        // 4. 빛 반사 계산 (윤슬)
         vec3 halfVector = normalize(lightDir + viewDir);
-        // 빛이 반사되는 강도 (반짝임 덩어리 크기 제어)
         float specularIntensity = max(0.0, dot(normal, halfVector));
-        float specular = pow(specularIntensity, 250.0); // 윤슬을 날카롭게 만듦
-        float softSpecular = pow(specularIntensity, 30.0); // 주변 퍼지는 빛
+        // 승수를 대폭 높여 윤슬이 굵직하게 뭉치지 않고 날카로운 점/선처럼 부서지도록 함
+        float specular = pow(specularIntensity, 400.0); 
+        float softSpecular = pow(specularIntensity, 60.0);
         
         // 시야각에 따른 하늘 반사율 (Fresnel)
-        float fresnel = pow(1.0 - max(dot(normal, viewDir), 0.0), 3.0);
+        float fresnel = pow(1.0 - max(dot(normal, viewDir), 0.0), 4.0);
         
-        // 멀어질수록 수평선(하늘) 색상 반영
+        // 멀어질수록 수평선 밝은 노란빛 하늘 반사
         float dist = length(vWorldPosition.xz);
         float horizonMix = smoothstep(0.0, 300.0, dist);
-        vec3 skyReflection = mix(vec3(0.2, 0.4, 0.7), vec3(1.0, 0.7, 0.4), horizonMix);
+        vec3 skyReflection = mix(vec3(0.7, 0.5, 0.3), vec3(1.0, 0.9, 0.5), horizonMix);
         
-        // 5. 최종 색상 조합
+        // 5. 색상 조합
         vec3 finalColor = mix(waterDeepColor, waterBaseColor, normal.y);
-        finalColor = mix(finalColor, skyReflection, fresnel * 0.7); // 하늘 반사 적용
+        finalColor = mix(finalColor, skyReflection, fresnel * 0.8);
         
-        // 오후 4-5시 황금빛 윤슬 더하기
-        vec3 sunColor = vec3(1.0, 0.85, 0.4);
-        finalColor += sunColor * specular * 3.5;       // 강렬한 반짝임
-        finalColor += sunColor * softSpecular * 0.3;   // 주변 물결 황금빛 물듦
+        // 사진처럼 밝게 빛나는 수많은 윤슬 조각들
+        vec3 sunColor = vec3(1.0, 0.9, 0.6);
+        finalColor += sunColor * specular * 3.0;     // 날카로운 윤슬
+        finalColor += sunColor * softSpecular * 0.5; // 윤슬 주변부 부드러운 빛 번짐
         
-        // 너무 밝아지지 않도록 톤매핑
-        finalColor = finalColor / (1.0 + finalColor * 0.2);
+        // 색감이 너무 진해지지 않도록 살짝 톤 다운 (얕은 느낌)
+        finalColor = finalColor * 0.95;
         
         gl_FragColor = vec4(finalColor, 0.95);
       }
