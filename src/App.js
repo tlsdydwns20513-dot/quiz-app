@@ -941,7 +941,8 @@ export class VRQuizApp {
         {button: arButton, mode: 'ar'}
       ].forEach(({button, mode}) => {
         if (!button) return;
-        button.classList.remove('a-hidden');
+        // classList.remove('a-hidden')을 하면 A-Frame의 MutationObserver와 무한 루프가 발생할 수 있으므로,
+        // CSS에서 .xr-entry-button.a-hidden { display: flex !important; } 로 처리합니다.
         button.style.display = 'flex';
         const label = button.querySelector('.xr-entry-label');
         if (label) {
@@ -955,10 +956,6 @@ export class VRQuizApp {
       });
     };
 
-    [vrButton, arButton].filter(Boolean).forEach((button) => {
-      const observer = new MutationObserver(syncButtonSupport);
-      observer.observe(button, {attributes: true, attributeFilter: ['class']});
-    });
     window.setTimeout(syncButtonSupport, 300);
     window.setTimeout(syncButtonSupport, 1200);
     window.setInterval(syncButtonSupport, 2000);
