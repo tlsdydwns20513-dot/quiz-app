@@ -1,0 +1,438 @@
+{
+  "domains": [
+    {
+      "id": "engaging",
+      "title": "Engaging with AI",
+      "titleKo": "AI와 상호작용하기",
+      "description": "AI가 제공하는 정보와 추천을 인식하고 비판적으로 평가하는 영역",
+      "requiredQuestionCount": 7,
+      "questions": [
+        {
+          "id": "E-1",
+          "competence": "Recognize AI's role and influence in different contexts.",
+          "competenceKo": "다양한 맥락에서 AI의 역할과 영향을 인식한다.",
+          "question": "영상에서 소개한 'AI와 상호작용하기(Engaging with AI)' 초능력이 필요한 상황은 무엇인가요?",
+          "choices": [
+            "유튜브가 내 취향에 맞는 영상을 추천해 줄 때, 그 추천이 어떻게 작동하는지 생각한다.",
+            "계산기로 수학 문제를 빠르게 푼다.",
+            "친구와 메시지를 주고받는다.",
+            "도서관에서 책을 검색한다."
+          ],
+          "answerIndex": 0,
+          "feedbackCorrect": "맞아요! 추천 알고리즘처럼 AI가 개입된 상황을 인식하고 비판적으로 생각하는 것이 Engaging with AI 초능력입니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI와 상호작용한다는 것은 AI가 우리에게 영향을 주는 순간을 알아채고, 그것을 비판적으로 바라보는 것입니다.",
+          "explanation": "AI의 추천, 필터링, 예측이 우리 경험에 어떤 영향을 주는지 인식하는 것이 Engaging with AI입니다.",
+          "difficulty": "easy",
+          "objectAnchor": "engaging_recommendation_board",
+          "objectLabel": "AI 추천 게시판"
+        },
+        {
+          "id": "E-2",
+          "competence": "Evaluate whether AI outputs should be accepted, revised, or rejected.",
+          "competenceKo": "AI 출력물을 수용, 수정, 거절할지 평가한다.",
+          "question": "AI가 숙제 답안을 만들어 주었는데 출처가 없습니다. 영상에서 배운 대로 가장 적절한 행동은 무엇인가요?",
+          "choices": [
+            "문장이 자연스러우니 그대로 제출한다.",
+            "선생님이 모를 것 같으면 사용한다.",
+            "믿을 만한 자료와 비교해 확인하고 필요한 부분을 수정한다.",
+            "AI가 쓴 내용은 모두 틀렸다고 보고 버린다."
+          ],
+          "answerIndex": 2,
+          "feedbackCorrect": "맞아요! 영상에서 강조했듯이, AI 출력은 바로 믿기보다 근거를 확인하고 스스로 판단해야 합니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI 출력은 유용할 수 있지만 정확성 확인이 필요합니다.",
+          "explanation": "AI가 만든 정보도 오류나 편향을 포함할 수 있으므로 검증 후 사용해야 합니다.",
+          "difficulty": "easy",
+          "objectAnchor": "engaging_search_board",
+          "objectLabel": "검색 결과 검토 보드"
+        },
+        {
+          "id": "E-3",
+          "competence": "Examine how predictive AI systems provide recommendations that can inform and limit perspectives.",
+          "competenceKo": "예측 AI 추천이 관점을 넓히거나 제한할 수 있음을 살핀다.",
+          "question": "영상에서 언급한 '필터 버블'은 어떤 상황을 설명하나요?",
+          "choices": [
+            "AI가 내가 원하지 않는 콘텐츠를 강제로 보여주는 것",
+            "AI 추천이 내 이전 행동을 기반으로 비슷한 것만 계속 보여주어 시야가 좁아지는 현상",
+            "인터넷 속도가 느려져 영상 버퍼링이 생기는 것",
+            "AI가 모든 정보를 차단해 버리는 것"
+          ],
+          "answerIndex": 1,
+          "feedbackCorrect": "맞아요! 필터 버블은 AI 추천이 내 기존 관심사만 반복해서 보여주어 다양한 관점을 접하기 어려워지는 현상입니다.",
+          "feedbackWrong": "다시 생각해 봅시다. 추천 시스템은 나의 이전 행동을 바탕으로 비슷한 정보를 더 보여줄 수 있습니다.",
+          "explanation": "AI 추천은 정보 탐색을 돕지만 필터 버블을 만들어 관점을 제한할 수도 있습니다.",
+          "difficulty": "medium",
+          "objectAnchor": "engaging_bias_board",
+          "objectLabel": "편향 사례 보드"
+        },
+        {
+          "id": "E-4",
+          "competence": "Explain how AI could be used to amplify societal biases.",
+          "competenceKo": "AI가 사회적 편향을 증폭할 수 있음을 설명한다.",
+          "question": "영상에서 AI의 편향(Bias) 문제를 언급했습니다. 편향이 생기는 가장 주요한 원인은 무엇인가요?",
+          "choices": [
+            "AI가 스스로 나쁜 생각을 가지기 때문이다.",
+            "AI를 만든 개발자가 의도적으로 차별을 넣기 때문이다.",
+            "AI가 학습한 데이터와 설계 과정에 이미 존재하던 편향이 반영되기 때문이다.",
+            "AI는 항상 공정하므로 편향이 생기지 않는다."
+          ],
+          "answerIndex": 2,
+          "feedbackCorrect": "맞아요! AI는 학습 데이터와 설계자의 선택에서 나오는 편향을 그대로 학습하고 증폭시킬 수 있습니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI는 데이터와 사람이 만든 설계의 영향을 받습니다.",
+          "explanation": "AI의 판단은 완전히 중립적이지 않을 수 있으며 사회적 편향을 확대할 수 있습니다.",
+          "difficulty": "medium"
+        },
+        {
+          "id": "E-5",
+          "competence": "Describe how AI systems consume energy and natural resources.",
+          "competenceKo": "AI 시스템이 에너지와 자연 자원을 소비한다는 점을 설명한다.",
+          "question": "영상에서 AI를 책임감 있게 사용하는 방법을 강조했습니다. 이미지를 만드는 생성형 AI를 사용할 때 가장 책임 있는 선택은 무엇인가요?",
+          "choices": [
+            "필요한 만큼만 생성하고 결과를 신중히 고른다.",
+            "마음에 들 때까지 수백 번 반복 생성한다.",
+            "AI는 에너지를 쓰지 않으므로 걱정하지 않는다.",
+            "항상 가장 큰 모델만 사용한다."
+          ],
+          "answerIndex": 0,
+          "feedbackCorrect": "맞아요! AI도 서버와 전력을 사용하므로 목적에 맞게 쓰는 태도가 필요합니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI 시스템은 작동 과정에서 에너지와 자원을 사용합니다.",
+          "explanation": "AI 사용에는 환경적 비용이 따를 수 있어 책임 있는 사용이 중요합니다.",
+          "difficulty": "easy"
+        },
+        {
+          "id": "E-6",
+          "competence": "Analyze how well the use of an AI system aligns with ethical principles and human values.",
+          "competenceKo": "AI 사용이 윤리 원칙과 인간 가치에 맞는지 분석한다.",
+          "question": "영상에서 소개한 AI 리터러시의 핵심은 무엇인가요?",
+          "choices": [
+            "AI를 빠르게 쓸 수 있는 기술만 익히는 것",
+            "AI를 비판적으로 이해하고, 책임감 있게 활용하며, 인간 가치를 중심에 두는 것",
+            "AI가 결정하는 대로 따르는 것",
+            "AI를 절대 쓰지 않는 것"
+          ],
+          "answerIndex": 1,
+          "feedbackCorrect": "맞아요! AI 리터러시는 기술 사용을 넘어 비판적 이해와 윤리적 활용 능력을 포함합니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI 도입은 편리함만이 아니라 윤리적 기준도 확인해야 합니다.",
+          "explanation": "AI 시스템이 사람에게 미치는 영향을 기준으로 적절성을 판단해야 합니다.",
+          "difficulty": "medium"
+        },
+        {
+          "id": "E-7",
+          "competence": "Connect AI's social and ethical impacts to its technical capabilities and limitations.",
+          "competenceKo": "AI의 사회·윤리적 영향을 기술적 능력과 한계에 연결한다.",
+          "question": "음성 인식 AI가 어떤 친구의 말을 자주 알아듣지 못합니다. 영상의 내용에 따라 가장 적절한 분석은 무엇인가요?",
+          "choices": [
+            "그 친구가 말을 잘못한 것이므로 문제없다.",
+            "AI가 학습한 음성 데이터와 기술적 한계가 특정 사용자에게 불편을 줄 수 있다.",
+            "AI는 듣는 능력이 사람보다 항상 뛰어나다.",
+            "인식이 틀려도 결과를 그대로 따라야 한다."
+          ],
+          "answerIndex": 1,
+          "feedbackCorrect": "맞아요! 기술적 한계가 실제 사람의 경험과 권리에 영향을 줄 수 있습니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI의 기술적 한계는 사회적 불편이나 차별로 이어질 수 있습니다.",
+          "explanation": "AI의 성능 문제를 사회적 영향과 함께 보는 관점이 필요합니다.",
+          "difficulty": "hard"
+        }
+      ]
+    },
+    {
+      "id": "creating",
+      "title": "Creating with AI",
+      "titleKo": "AI로 창작하기",
+      "description": "AI를 창의적 사고와 제작 과정의 협력 도구로 활용하는 영역",
+      "requiredQuestionCount": 5,
+      "questions": [
+        {
+          "id": "C-1",
+          "competence": "Use AI systems to explore new perspectives and approaches that build upon original ideas.",
+          "competenceKo": "AI로 새로운 관점과 접근을 탐색해 기존 아이디어를 발전시킨다.",
+          "question": "영상에서 'AI로 창작하기(Creating with AI)' 초능력을 설명했습니다. 다음 중 이 초능력을 잘 발휘한 사례는 무엇인가요?",
+          "choices": [
+            "AI가 쓴 토론문을 이름만 바꿔 그대로 제출한다.",
+            "AI에게 반대 주장과 예상 질문을 생성하게 해서 내 생각을 보완하고 발전시킨다.",
+            "AI가 제안한 관점은 모두 무시하고 혼자 작업한다.",
+            "내 주장과 같은 의견만 AI로 생성해 붙인다."
+          ],
+          "answerIndex": 1,
+          "feedbackCorrect": "맞아요! AI를 협력 도구로 사용해 다양한 관점을 탐색하고 내 아이디어를 발전시키는 것이 Creating with AI입니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI는 내 생각을 대신하는 도구가 아니라 확장하는 도구로 쓸 수 있습니다.",
+          "explanation": "창작에서 AI는 아이디어를 넓히는 협력 도구가 될 수 있습니다.",
+          "difficulty": "easy",
+          "objectAnchor": "creating_idea_board",
+          "objectLabel": "아이디어 보드"
+        },
+        {
+          "id": "C-2",
+          "competence": "Visualize, prototype, and combine ideas using different types of AI systems.",
+          "competenceKo": "여러 유형의 AI로 아이디어를 시각화, 시제품화, 결합한다.",
+          "question": "환경 캠페인 포스터를 만들 때 AI를 가장 창의적으로 활용하는 방법은 무엇인가요?",
+          "choices": [
+            "텍스트, 이미지, 슬로건 아이디어를 각각 생성해 비교하고 직접 조합한다.",
+            "첫 번째 이미지 결과만 무조건 사용한다.",
+            "AI가 만든 포스터 그대로 이름만 바꿔 제출한다.",
+            "서로 다른 형식의 AI 결과물은 절대 섞지 않는다."
+          ],
+          "answerIndex": 0,
+          "feedbackCorrect": "맞아요! 여러 형식의 AI 결과를 비교하고 조합하면 더 풍부한 창작물을 만들 수 있습니다.",
+          "feedbackWrong": "다시 생각해 봅시다. 창작에서는 여러 아이디어를 실험하고 결합하는 과정이 중요합니다.",
+          "explanation": "AI를 활용한 제작은 다양한 형식의 결과를 탐색하고 편집하는 활동입니다.",
+          "difficulty": "medium",
+          "objectAnchor": "creating_image_frame",
+          "objectLabel": "생성 이미지 프레임"
+        },
+        {
+          "id": "C-3",
+          "competence": "Collaborate with generative AI systems to elicit feedback, refine results, and reflect on thought processes.",
+          "competenceKo": "생성형 AI와 협력해 피드백을 얻고 결과를 개선하며 사고 과정을 성찰한다.",
+          "question": "AI 글쓰기 도우미가 내 이야기를 더 길게 바꾸라고 제안했습니다. 영상의 내용대로 가장 좋은 행동은 무엇인가요?",
+          "choices": [
+            "무조건 AI 제안을 모두 따른다.",
+            "내가 표현하려던 의도와 맞는 제안만 골라 수정하고 이유를 생각해 본다.",
+            "AI 제안은 무조건 무시하고 바로 삭제한다.",
+            "글의 주제를 AI가 마음대로 정하게 한다."
+          ],
+          "answerIndex": 1,
+          "feedbackCorrect": "맞아요! AI의 피드백을 검토하고 내 의도에 맞게 선택하는 것이 중요합니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI와 협력할 때도 최종 판단과 성찰은 사람이 해야 합니다.",
+          "explanation": "AI와의 반복 작업은 결과 개선뿐 아니라 생각의 변화를 돌아보는 과정입니다.",
+          "difficulty": "medium",
+          "objectAnchor": "creating_copyright_board",
+          "objectLabel": "저작권 안내 보드"
+        },
+        {
+          "id": "C-4",
+          "competence": "Analyze how AI can safeguard or violate content authenticity and intellectual property.",
+          "competenceKo": "AI가 콘텐츠의 진정성과 지식재산권을 보호하거나 침해할 수 있음을 분석한다.",
+          "question": "영상에서 AI 창작과 저작권 문제를 언급했습니다. AI가 유명 작가의 화풍을 따라 그린 이미지를 발표 자료로 쓰기 전 확인해야 할 것은 무엇인가요?",
+          "choices": [
+            "AI가 만들었으니 출처 표시는 필요 없다.",
+            "작가의 권리, 사용 조건, 출처 표시 필요성을 반드시 확인한다.",
+            "친구들이 멋지다고 하면 그대로 쓴다.",
+            "인터넷에 있는 AI 결과물은 모두 자유롭게 써도 된다."
+          ],
+          "answerIndex": 1,
+          "feedbackCorrect": "맞아요! AI 창작물도 원작자 권리와 출처 표시 문제를 확인해야 합니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI 결과물도 기존 작품이나 작가의 권리와 관련될 수 있습니다.",
+          "explanation": "AI 창작에서는 독창성, 저작권, 출처 표시를 함께 고려해야 합니다.",
+          "difficulty": "hard"
+        },
+        {
+          "id": "C-5",
+          "competence": "Explain how AI systems perform tasks using precise language that avoids anthropomorphism.",
+          "competenceKo": "AI를 의인화하지 않고 정확한 언어로 작동 방식을 설명한다.",
+          "question": "생성형 AI가 시를 만들었을 때 영상의 내용에 따라 가장 정확한 설명은 무엇인가요?",
+          "choices": [
+            "AI가 감동을 느껴 시를 썼다.",
+            "AI가 학습한 문장 패턴과 입력 지시를 바탕으로 시를 생성했다.",
+            "AI가 사람처럼 경험을 떠올렸다.",
+            "AI가 창작 의도를 스스로 정했다."
+          ],
+          "answerIndex": 1,
+          "feedbackCorrect": "맞아요! AI는 감정이나 의도보다 데이터 패턴과 지시에 따라 결과를 생성합니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI를 사람처럼 표현하면 작동 방식을 오해할 수 있습니다.",
+          "explanation": "정확한 언어는 AI에 대한 오해를 줄이고 책임 있는 사용을 돕습니다.",
+          "difficulty": "easy"
+        }
+      ]
+    },
+    {
+      "id": "managing",
+      "title": "Managing AI",
+      "titleKo": "AI 관리하기",
+      "description": "목표에 맞게 AI 사용을 결정하고 지시, 위임, 규칙을 관리하는 영역",
+      "requiredQuestionCount": 5,
+      "questions": [
+        {
+          "id": "M-1",
+          "competence": "Decide whether to use AI systems based on the nature of the task.",
+          "competenceKo": "과제의 성격에 따라 AI 사용 여부를 결정한다.",
+          "question": "영상에서 'AI 관리하기(Managing AI)' 초능력을 설명했습니다. 나의 진솔한 경험을 쓰는 성찰문 과제가 있을 때 가장 적절한 AI 사용 판단은 무엇인가요?",
+          "choices": [
+            "AI가 전부 대신 써주게 한다.",
+            "개인 경험과 판단이 핵심이므로 아이디어 정리 정도만 제한적으로 활용한다.",
+            "성찰문에는 항상 AI를 100% 써야 한다.",
+            "AI가 쓴 글이 더 진솔하다."
+          ],
+          "answerIndex": 1,
+          "feedbackCorrect": "맞아요! 과제의 목적과 인간 판단의 필요성을 고려해 AI 사용 범위를 정해야 합니다.",
+          "feedbackWrong": "다시 생각해 봅시다. 모든 과제에 AI를 같은 방식으로 쓰는 것은 적절하지 않습니다.",
+          "explanation": "AI 사용 여부는 과제의 성격, 학습 목표, 윤리 기준에 따라 달라집니다.",
+          "difficulty": "easy",
+          "objectAnchor": "managing_decision_cards",
+          "objectLabel": "AI 사용 판단 카드"
+        },
+        {
+          "id": "M-2",
+          "competence": "Decompose a problem based on the capabilities and limitations of both AI systems and humans.",
+          "competenceKo": "AI와 인간의 능력과 한계를 고려해 문제를 분해한다.",
+          "question": "역사 탐구 프로젝트에서 AI와 사람이 역할을 나누는 방식으로 영상의 내용에 가장 맞는 것은 무엇인가요?",
+          "choices": [
+            "AI가 자료 요약을 돕고, 학생은 맥락 판단과 편향 분석을 한다.",
+            "AI가 결론까지 모두 쓰고 학생은 제출만 한다.",
+            "사람은 아무 판단도 하지 않는다.",
+            "자료 확인 없이 AI 요약만 그대로 믿는다."
+          ],
+          "answerIndex": 0,
+          "feedbackCorrect": "맞아요! AI가 잘하는 일과 사람이 책임져야 할 일을 나누는 것이 중요합니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI는 보조할 수 있지만 해석과 판단은 사람이 맡아야 합니다.",
+          "explanation": "복잡한 문제는 단계별로 나누고 각 단계에 적절한 도구와 역할을 배치해야 합니다.",
+          "difficulty": "medium",
+          "objectAnchor": "managing_plan_board",
+          "objectLabel": "작업 계획 보드"
+        },
+        {
+          "id": "M-3",
+          "competence": "Direct generative AI systems by providing specific instructions, appropriate context, and evaluation criteria.",
+          "competenceKo": "구체적 지시, 적절한 맥락, 평가 기준으로 생성형 AI를 지시한다.",
+          "question": "영상에서 AI를 잘 '관리'하려면 좋은 지시(프롬프트)가 중요하다고 했습니다. 발표 대본을 요청할 때 가장 좋은 프롬프트는 무엇인가요?",
+          "choices": [
+            "발표문 써 줘.",
+            "중학생 대상, 3분 발표, 쉬운 표현으로, 출처 표시 포함, 마지막에 질문 2개를 넣어 줘.",
+            "멋지게 많이 써 줘.",
+            "아무 주제로 알아서 해 줘."
+          ],
+          "answerIndex": 1,
+          "feedbackCorrect": "맞아요! 역할, 대상, 길이, 기준을 구체적으로 제시하면 결과를 더 잘 관리할 수 있습니다.",
+          "feedbackWrong": "다시 생각해 봅시다. 좋은 지시는 맥락과 평가 기준을 분명히 담습니다.",
+          "explanation": "AI를 효과적으로 관리하려면 명확하고 구체적인 지시가 필요합니다.",
+          "difficulty": "easy",
+          "objectAnchor": "managing_prompt_bench",
+          "objectLabel": "프롬프트 실험대"
+        },
+        {
+          "id": "M-4",
+          "competence": "Delegate tasks to AI systems to appropriately automate or augment human workflows.",
+          "competenceKo": "AI에 작업을 적절히 위임해 인간의 작업 흐름을 자동화하거나 확장한다.",
+          "question": "모둠 발표 준비에서 AI에 맡기기 가장 적절한 역할은 무엇인가요?",
+          "choices": [
+            "모둠의 최종 입장을 AI가 대신 결정하게 한다.",
+            "자료를 표로 정리하고 예상 질문 초안을 만들게 한 뒤 사람이 검토한다.",
+            "발표자의 책임을 모두 AI에게 넘긴다.",
+            "출처 확인을 AI에게 생략하게 한다."
+          ],
+          "answerIndex": 1,
+          "feedbackCorrect": "맞아요! 반복적 정리나 초안 생성은 AI가 돕고 최종 판단은 사람이 해야 합니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI 위임은 사람의 판단과 책임을 없애는 것이 아닙니다.",
+          "explanation": "AI는 작업을 빠르게 돕는 도구이지만 중요한 결정은 사람이 검토해야 합니다.",
+          "difficulty": "medium"
+        },
+        {
+          "id": "M-5",
+          "competence": "Develop and communicate guidelines for using AI systems that align with human values, promote fairness, and prioritize transparency.",
+          "competenceKo": "인간 가치, 공정성, 투명성을 우선하는 AI 사용 지침을 만들고 전달한다.",
+          "question": "영상을 보고 우리 반 AI 사용 약속을 만들려 합니다. 반드시 포함해야 할 내용은 무엇인가요?",
+          "choices": [
+            "AI 사용 사실과 출처를 밝히고, 결과를 검토하며, 타인의 권리를 존중한다.",
+            "AI를 쓰면 절대 말하지 않는다.",
+            "빠르게 끝내는 것만 중요하다.",
+            "AI 결과는 검토하지 않는다."
+          ],
+          "answerIndex": 0,
+          "feedbackCorrect": "맞아요! 투명성, 공정성, 책임이 담긴 약속이 필요합니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI 사용 규칙은 정직한 공개와 책임 있는 검토를 포함해야 합니다.",
+          "explanation": "수업에서 AI를 쓰려면 모두가 이해할 수 있는 공정하고 투명한 기준이 필요합니다.",
+          "difficulty": "easy"
+        }
+      ]
+    },
+    {
+      "id": "designing",
+      "title": "Designing AI",
+      "titleKo": "AI 설계하기",
+      "description": "AI 시스템의 데이터, 기준, 한계, 영향을 이해하며 설계 관점으로 탐구하는 영역",
+      "requiredQuestionCount": 5,
+      "questions": [
+        {
+          "id": "D-1",
+          "competence": "Describe how AI systems can be designed to support a solution to a community problem.",
+          "competenceKo": "AI 시스템이 지역사회 문제 해결을 지원하도록 설계될 수 있음을 설명한다.",
+          "question": "영상에서 'AI 설계하기(Designing AI)' 초능력을 소개했습니다. 학교 급식 잔반을 줄이는 AI를 설계할 때 가장 먼저 생각해야 할 것은 무엇인가요?",
+          "choices": [
+            "어떤 데이터가 필요하고, 누가 영향을 받으며, 사람이 어디서 판단할지 정한다.",
+            "AI 이름부터 멋지게 정한다.",
+            "학생 의견은 받지 않는다.",
+            "위험한 부분은 나중에 생각한다."
+          ],
+          "answerIndex": 0,
+          "feedbackCorrect": "맞아요! 문제, 데이터, 사용자, 인간 개입 지점을 함께 설계해야 합니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI 설계는 기술보다 먼저 해결할 문제와 영향을 살펴야 합니다.",
+          "explanation": "AI는 지역사회 문제를 도울 수 있지만 설계 단계에서 사람과 맥락을 고려해야 합니다.",
+          "difficulty": "medium",
+          "objectAnchor": "designing_data_table",
+          "objectLabel": "데이터 테이블"
+        },
+        {
+          "id": "D-2",
+          "competence": "Compare the capabilities and limitations of AI systems that follow algorithms created by humans with those that make predictions based on data.",
+          "competenceKo": "사람이 만든 규칙을 따르는 시스템과 데이터 기반 예측 시스템의 능력과 한계를 비교한다.",
+          "question": "영상에서 AI가 작동하는 두 가지 방식을 설명했습니다. 규칙 기반 챗봇과 데이터 기반 AI 챗봇의 차이로 가장 알맞은 설명은 무엇인가요?",
+          "choices": [
+            "규칙 기반은 사람이 정한 조건을 따르고, 데이터 기반은 학습 데이터에서 패턴을 찾아 예측한다.",
+            "두 방식은 완전히 똑같다.",
+            "데이터 기반 AI는 데이터가 나빠도 항상 정확하다.",
+            "규칙 기반 시스템에는 사람이 만든 규칙이 전혀 없다."
+          ],
+          "answerIndex": 0,
+          "feedbackCorrect": "맞아요! 두 방식은 작동 원리와 한계가 다릅니다.",
+          "feedbackWrong": "다시 생각해 봅시다. 규칙을 따르는 시스템과 데이터로 예측하는 시스템은 다르게 작동합니다.",
+          "explanation": "AI 설계를 이해하려면 규칙 기반과 데이터 기반 방식의 차이를 알아야 합니다.",
+          "difficulty": "medium",
+          "objectAnchor": "designing_model_flow",
+          "objectLabel": "모델 흐름도"
+        },
+        {
+          "id": "D-3",
+          "competence": "Collect and curate data that could be used to train an AI model by considering relevance, representation, and potential impact.",
+          "competenceKo": "관련성, 대표성, 영향을 고려해 AI 모델 학습 데이터를 수집하고 정리한다.",
+          "question": "재활용품 분류 AI를 만들기 위해 사진 데이터를 모을 때 영상에서 강조한 '좋은 데이터'의 조건에 맞는 방법은 무엇인가요?",
+          "choices": [
+            "한 종류의 플라스틱 사진만 최대한 많이 모은다.",
+            "다양한 재활용품 사진을 균형 있게 모으고 정확하게 라벨을 붙인다.",
+            "흐릿한 사진도 모두 정답 데이터로 넣는다.",
+            "사진 출처와 사용 허락은 확인하지 않아도 된다."
+          ],
+          "answerIndex": 1,
+          "feedbackCorrect": "맞아요! 데이터의 다양성, 품질, 라벨이 모델 성능과 공정성에 영향을 줍니다.",
+          "feedbackWrong": "다시 생각해 봅시다. 좋은 AI를 만들려면 좋은 데이터가 필요합니다.",
+          "explanation": "학습 데이터는 AI가 무엇을 잘하고 못하는지를 크게 좌우합니다.",
+          "difficulty": "easy",
+          "objectAnchor": "designing_eval_board",
+          "objectLabel": "평가 보드"
+        },
+        {
+          "id": "D-4",
+          "competence": "Evaluate AI systems using defined criteria, expected outcomes, and user feedback.",
+          "competenceKo": "정의된 기준, 기대 결과, 사용자 피드백으로 AI 시스템을 평가한다.",
+          "question": "AI 추천 시스템을 개선할 때 영상에서 강조한 올바른 절차는 무엇인가요?",
+          "choices": [
+            "정확성, 공정성, 사용 편의성 기준을 정하고 다양한 사용자 피드백으로 반복 테스트한다.",
+            "개발자가 마음에 들면 바로 완성이다.",
+            "한 번 성공하면 더 이상 평가하지 않는다.",
+            "불편하다는 사용자 의견은 무시한다."
+          ],
+          "answerIndex": 0,
+          "feedbackCorrect": "맞아요! 기준과 피드백을 바탕으로 반복 개선해야 합니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI 시스템은 다양한 기준과 사용자 경험으로 평가해야 합니다.",
+          "explanation": "AI 설계는 완성 후에도 테스트와 피드백을 통해 개선되는 과정입니다.",
+          "difficulty": "medium"
+        },
+        {
+          "id": "D-5",
+          "competence": "Describe an AI model's purpose, intended users, and its limitations.",
+          "competenceKo": "AI 모델의 목적, 의도된 사용자, 한계를 설명한다.",
+          "question": "영상에서 AI를 투명하게 소개하는 '모델 카드'를 언급했습니다. 새로운 학습 추천 AI 모델 카드에 꼭 들어가야 할 내용은 무엇인가요?",
+          "choices": [
+            "모델의 목적, 사용할 사람, 사용한 데이터, 잘하는 점과 한계",
+            "멋진 홍보 문구만",
+            "정확도 숫자 하나만",
+            "개발자의 이름만"
+          ],
+          "answerIndex": 0,
+          "feedbackCorrect": "맞아요! 사용자가 AI를 현실적으로 이해하려면 목적과 한계가 함께 제시되어야 합니다.",
+          "feedbackWrong": "다시 생각해 봅시다. AI 모델 설명에는 무엇을 위해, 누구에게, 어디까지 쓸 수 있는지가 필요합니다.",
+          "explanation": "모델 카드는 AI를 책임 있게 이해하고 사용하는 데 도움을 줍니다.",
+          "difficulty": "easy"
+        }
+      ]
+    }
+  ]
+}

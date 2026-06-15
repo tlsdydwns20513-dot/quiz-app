@@ -1,0 +1,87 @@
+{
+  "contentTitle": "AI 리터러시 탐구 퀴즈",
+  "heroTitle": "AI 리터러시 탐구 퀴즈",
+  "heroSubtitle": "영상을 보고 4가지 초능력을 확인하세요!",
+  "schoolName": "",
+  "subtitle": "",
+  "startGuide": "영상을 먼저 시청한 뒤 시작해 주세요.",
+  "startButtonText": "퀴즈 시작",
+  "progressTitle": "AI Literacy Studio Progress",
+  "resultTitle": "AI Literacy 결과 리포트",
+  "resultFooter": "강점은 더 확장하고, 보완 영역은 동영상을 다시 보며 도전해 보세요.",
+  "palette": {
+    "surface": "#eef6fb",
+    "surfaceElevated": "#f8fbff",
+    "surfaceGlass": "#dfefff",
+    "navy": "#102235",
+    "ink": "#10243a",
+    "muted": "#506b84",
+    "line": "#b9cde0",
+    "sky": "#62c6f2",
+    "violet": "#8b5cf6",
+    "mint": "#5eead4",
+    "success": "#21a66b",
+    "danger": "#de4d5a",
+    "warning": "#f59e0b"
+  },
+  "ui": {
+    "radius": 42,
+    "borderWidth": 2,
+    "shadow": "rgba(8, 22, 38, 0.16)",
+    "spacing": 32,
+    "fontScale": 1,
+    "panelStyle": "cleanFlat",
+    "depthGap": 0.12,
+    "glassOpacity": 0.88
+  },
+  "domains": {
+    "engaging": {
+      "accent": "#2563eb",
+      "accentSoft": "#dbeafe",
+      "icon": "AI",
+      "shortLabel": "인식"
+    },
+    "creating": {
+      "accent": "#8b5cf6",
+      "accentSoft": "#ede9fe",
+      "icon": "CREATE",
+      "shortLabel": "창작"
+    },
+    "managing": {
+      "accent": "#16a34a",
+      "accentSoft": "#dcfce7",
+      "icon": "GUIDE",
+      "shortLabel": "관리"
+    },
+    "designing": {
+      "accent": "#f97316",
+      "accentSoft": "#ffedd5",
+      "icon": "BUILD",
+      "shortLabel": "설계"
+    }
+  },
+  "introVideo": {
+    "enabled": true,
+    "type": "mp4",
+    "url": "./assets/videos/ai-literacy-4-superpowers.mp4",
+    "title": "AI를 다루는 4가지 초능력",
+    "kicker": "📹 사전 영상 시청",
+    "description": "먼저 영상을 끝까지 시청해 주세요. 영상에서 배운 내용을 바탕으로 퀴즈를 풀게 됩니다!",
+    "confirmText": "영상 다 봤어요! 퀴즈 시작",
+    "requiredBeforeQuiz": true
+  },
+  "arMission": {
+    "enabled": true,
+    "sequential": true,
+    "markerMode": true,
+    "order": [
+      "framework",
+      "engaging",
+      "creating",
+      "managing",
+      "designing",
+      "report",
+      "survey"
+    ]
+  }
+}
