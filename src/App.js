@@ -107,19 +107,19 @@ function createBrightSkyCampusTexture() {
   const width = canvas.width;
   const height = canvas.height;
 
-  // 하늘 그라디언트 — 위는 짙은 하늘색, 아래는 밝은 옅은 하늘색
+  // 노을(Sunset) 하늘 그라디언트 — 위는 보랏빛/어두운 파랑, 아래는 주황/따뜻한 노랑
   const skyGrad = ctx.createLinearGradient(0, 0, 0, height);
-  skyGrad.addColorStop(0, '#5ab4e8');
-  skyGrad.addColorStop(0.38, '#82cef0');
-  skyGrad.addColorStop(0.66, '#b8e4f8');
-  skyGrad.addColorStop(0.88, '#d8f0fa');
-  skyGrad.addColorStop(1, '#e8f8ff');
+  skyGrad.addColorStop(0, '#2b1b42');
+  skyGrad.addColorStop(0.35, '#6a3458');
+  skyGrad.addColorStop(0.65, '#de6352');
+  skyGrad.addColorStop(0.85, '#ff964f');
+  skyGrad.addColorStop(1, '#ffdf8f');
   ctx.fillStyle = skyGrad;
   ctx.fillRect(0, 0, width, height);
 
   const rand = seededRandomStatic(20260615);
 
-  // 구름 그리기 — 여러 개의 부드러운 흰 타원
+  // 구름 그리기 — 노을빛에 물든 부드러운 타원
   function drawCloud(cx, cy, spread, layers) {
     for (let l = 0; l < layers; l++) {
       const r = rand();
@@ -129,9 +129,9 @@ function createBrightSkyCampusTexture() {
       const ry = rx * (0.38 + rand() * 0.32);
       const alpha = 0.28 + rand() * 0.38;
       const cloudGrad = ctx.createRadialGradient(x, y, 0, x, y, rx);
-      cloudGrad.addColorStop(0, `rgba(255,255,255,${alpha})`);
-      cloudGrad.addColorStop(0.55, `rgba(240,248,255,${alpha * 0.6})`);
-      cloudGrad.addColorStop(1, 'rgba(200,235,250,0)');
+      cloudGrad.addColorStop(0, `rgba(255,180,140,${alpha})`);
+      cloudGrad.addColorStop(0.55, `rgba(255,120,100,${alpha * 0.6})`);
+      cloudGrad.addColorStop(1, 'rgba(200,80,100,0)');
       ctx.save();
       ctx.fillStyle = cloudGrad;
       ctx.beginPath();
@@ -143,19 +143,19 @@ function createBrightSkyCampusTexture() {
 
   // 먼 작은 구름
   for (let i = 0; i < 18; i++) {
-    drawCloud(rand() * width, height * (0.12 + rand() * 0.36), 80 + rand() * 120, 6);
+    drawCloud(rand() * width, height * (0.32 + rand() * 0.46), 80 + rand() * 120, 6);
   }
   // 크고 가까운 구름
   for (let i = 0; i < 8; i++) {
-    drawCloud(rand() * width, height * (0.08 + rand() * 0.28), 160 + rand() * 200, 12);
+    drawCloud(rand() * width, height * (0.28 + rand() * 0.38), 160 + rand() * 200, 12);
   }
 
-  // 햇빛 광채 (우상단)
-  const sunGrad = ctx.createRadialGradient(width * 0.78, height * 0.08, 0, width * 0.78, height * 0.08, 340);
-  sunGrad.addColorStop(0, 'rgba(255,248,200,0.44)');
-  sunGrad.addColorStop(0.28, 'rgba(255,235,140,0.20)');
-  sunGrad.addColorStop(0.58, 'rgba(255,210,80,0.08)');
-  sunGrad.addColorStop(1, 'rgba(255,255,255,0)');
+  // 지는 태양 광채 (우측 하단 지평선 부근)
+  const sunGrad = ctx.createRadialGradient(width * 0.78, height * 0.85, 0, width * 0.78, height * 0.85, 480);
+  sunGrad.addColorStop(0, 'rgba(255,255,255,0.85)');
+  sunGrad.addColorStop(0.18, 'rgba(255,220,120,0.55)');
+  sunGrad.addColorStop(0.48, 'rgba(255,100,80,0.22)');
+  sunGrad.addColorStop(1, 'rgba(200,50,80,0)');
   ctx.fillStyle = sunGrad;
   ctx.fillRect(0, 0, width, height);
 
@@ -1271,19 +1271,19 @@ export class VRQuizApp {
   }
 
   renderGalaxyFloor() {
-    // 밝은 교실 분위기 — 따뜻한 황금빛 바닥 파티클
+    // 노을 분위기 — 따뜻한 주황/보랏빛 바닥 파티클
     const galaxy = document.createElement('a-entity');
     galaxy.id = 'galaxy-floor';
     galaxy.setAttribute('position', '0 0.018 -1.55');
     galaxy.setAttribute(
       'galaxy-floor',
-      'count: 4800; radius: 6.4; branches: 5; speed: 0.028; size: 0.024; maxPointSize: 8; opacity: 0.38; coreStrength: 0; coreGlow: 0; pointCore: 0.10; thickness: 0.012; swirl: 2.2; colorInside: #ffe082; colorMid: #a8d8ea; colorOutside: #c8e6c9'
+      'count: 4800; radius: 6.4; branches: 5; speed: 0.028; size: 0.024; maxPointSize: 8; opacity: 0.38; coreStrength: 0; coreGlow: 0; pointCore: 0.10; thickness: 0.012; swirl: 2.2; colorInside: #ffa726; colorMid: #ff7043; colorOutside: #ab47bc'
     );
     this.environmentRoot.appendChild(galaxy);
   }
 
   renderSkyGalaxy() {
-    // 교실 분위기 — 위쪽에 부드러운 빛 오라 효과
+    // 노을 분위기 — 위쪽에 부드러운 핑크/주황 오라 효과
     const halo = document.createElement('a-entity');
     halo.id = 'sky-galaxy-halo';
     halo.setAttribute('position', '0 5.2 -0.35');
@@ -1293,20 +1293,20 @@ export class VRQuizApp {
     galaxy.setAttribute('position', '0 0 0');
     galaxy.setAttribute(
       'galaxy-floor',
-      'count: 6000; radius: 4.8; branches: 4; speed: 0.03; size: 0.048; maxPointSize: 14; opacity: 0.55; coreStrength: 0.2; coreGlow: 0.5; pointCore: 0.20; thickness: 0.022; swirl: 2.0; colorInside: #fff9c4; colorMid: #b2dfdb; colorOutside: #c8e6c9'
+      'count: 6000; radius: 4.8; branches: 4; speed: 0.03; size: 0.048; maxPointSize: 14; opacity: 0.55; coreStrength: 0.2; coreGlow: 0.5; pointCore: 0.20; thickness: 0.022; swirl: 2.0; colorInside: #ffe0b2; colorMid: #f48fb1; colorOutside: #ce93d8'
     );
     halo.appendChild(galaxy);
     this.environmentRoot.appendChild(halo);
   }
 
   renderSpaceBackground() {
-    // 교실 분위기 — 주변 따뜻한 빛 입자 (작은 반짝임)
+    // 노을 분위기 — 주변 따뜻한 빛 입자 (작은 반짝임)
     const space = document.createElement('a-entity');
     space.id = 'space-background';
 
     const rand = this.seededRandom(20260508);
-    // 밝고 따뜻한 색상 팔레트
-    const colors = ['#ffffff', '#fff9c4', '#ffe082', '#c8e6c9', '#b2ebf2', '#f8bbd0', '#e1bee7'];
+    // 노을과 어울리는 색상 팔레트
+    const colors = ['#ffffff', '#ffecb3', '#ffcc80', '#ffab91', '#f48fb1', '#ce93d8', '#b39ddb'];
     const starCount = 320;
 
     for (let index = 0; index < starCount; index += 1) {
@@ -1345,14 +1345,14 @@ export class VRQuizApp {
     const colors = new Float32Array(count * 3);
     const sizes = new Float32Array(count);
     const alphas = new Float32Array(count);
-    // 밝고 따뜻한 팉레트 (EB)
+    // 노을빛 따뜻한 팔레트 (Sunset)
     const palette = [
       new THREE.Color('#ffffff'),
-      new THREE.Color('#fff9e0'),
-      new THREE.Color('#ffe082'),
-      new THREE.Color('#c8e6c9'),
-      new THREE.Color('#b2ebf2'),
-      new THREE.Color('#f8bbd0')
+      new THREE.Color('#ffecb3'),
+      new THREE.Color('#ffcc80'),
+      new THREE.Color('#ffab91'),
+      new THREE.Color('#f48fb1'),
+      new THREE.Color('#ce93d8')
     ];
 
     for (let index = 0; index < count; index += 1) {
