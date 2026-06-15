@@ -1345,37 +1345,24 @@ export class VRQuizApp {
   }
 
   applyImmersiveSkyTexture() {
-    // 1. 하늘 렌더링 (커스텀 쉐이더 사용, 하프 돔 형태로 상단만 그림)
+    // 1. 화이트톤 실내 360 파노라마 적용 (전체 돔)
     if (this.sky) {
       this.sky.setAttribute('radius', '500');
+      // 기존 쉐이더 설정 제거 및 이미지 src 지정
+      this.sky.removeAttribute('material');
       this.sky.setAttribute('material', {
-        shader: 'ocean-sunset-sky',
+        shader: 'flat',
+        src: './assets/images/white_scifi_room.png',
         side: 'back'
       });
-      // 수평선 아래를 가리기 위해 반구체(thetaLength: 90) 적용
-      this.sky.setAttribute('geometry', 'primitive: sphere; radius: 500; thetaLength: 90;');
+      // 전체 구체로 변경 (기존 thetaLength 제거)
+      this.sky.setAttribute('geometry', 'primitive: sphere; radius: 500;');
     }
 
-    // 2. 바다 렌더링 (커스텀 쉐이더 + 무수히 많은 정점으로 출렁임 효과)
-    let ocean = this.environmentRoot.querySelector('#animated-ocean-surface');
-    if (!ocean) {
-      ocean = document.createElement('a-plane');
-      ocean.id = 'animated-ocean-surface';
-      // 바다를 거대하게 넓게 깔고, 폴리곤(세그먼트) 수를 늘려 파도 연산을 가능하게 함
-      ocean.setAttribute('width', '1000');
-      ocean.setAttribute('height', '1000');
-      ocean.setAttribute('segments-width', '150');
-      ocean.setAttribute('segments-height', '150');
-      ocean.setAttribute('rotation', '-90 0 0');
-      // 시야 높이 살짝 아래로 바다를 내림
-      ocean.setAttribute('position', '0 -1.5 0');
-      
-      ocean.setAttribute('material', {
-        shader: 'animated-ocean',
-        transparent: true
-      });
-      
-      this.environmentRoot.appendChild(ocean);
+    // 2. 바다 노을에서 쓰던 애니메이션 바다 삭제
+    const ocean = this.environmentRoot.querySelector('#animated-ocean-surface');
+    if (ocean) {
+      ocean.parentNode.removeChild(ocean);
     }
   }
 
