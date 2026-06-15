@@ -416,15 +416,15 @@ function registerXrVisibilityComponents() {
 
 const STUDIO_FACES = {
   progress: {...createFacePose(0, 2.30, STATION_ARC_RADIUS), label: 'Progress', zone: '역량 리포트', accentKey: 'navy'},
-  framework: {...createFacePose(-42, 2.30, STATION_ARC_RADIUS), label: 'AI Edu', zone: 'AI 교육 탐구', accentKey: 'framework'},
-  managing: {...createFacePose(-84, 2.30, STATION_ARC_RADIUS), label: 'Applying', zone: 'AI 교육 활용하기', accentKey: 'success'},
-  engaging: {...createFacePose(-126, 2.30, STATION_ARC_RADIUS), label: 'Understanding', zone: 'AI 교육 이해하기', accentKey: 'sky'},
+  framework: {...createFacePose(126, 2.30, STATION_ARC_RADIUS), label: 'AI Edu', zone: 'AI 교육 탐구', accentKey: 'framework'},
+  engaging: {...createFacePose(84, 2.30, STATION_ARC_RADIUS), label: 'Understanding', zone: 'AI 교육 이해하기', accentKey: 'sky'},
   creating: {...createFacePose(42, 2.30, STATION_ARC_RADIUS), label: 'Learning', zone: 'AI로 함께 배우기', accentKey: 'violet'},
-  designing: {...createFacePose(84, 2.30, STATION_ARC_RADIUS), label: 'Designing', zone: 'AI 교육의 미래 설계', accentKey: 'warning'},
-  survey: {...createFacePose(126, 2.30, STATION_ARC_RADIUS), label: 'Survey', zone: '성찰 설문', accentKey: 'mint'}
+  managing: {...createFacePose(-42, 2.30, STATION_ARC_RADIUS), label: 'Applying', zone: 'AI 교육 활용하기', accentKey: 'success'},
+  designing: {...createFacePose(-84, 2.30, STATION_ARC_RADIUS), label: 'Designing', zone: 'AI 교육의 미래 설계', accentKey: 'warning'},
+  survey: {...createFacePose(-126, 2.30, STATION_ARC_RADIUS), label: 'Survey', zone: '성찰 설문', accentKey: 'mint'}
 };
 
-const STUDIO_FACE_ORDER = ['progress', 'creating', 'designing', 'survey', 'engaging', 'managing', 'framework'];
+const STUDIO_FACE_ORDER = ['framework', 'engaging', 'creating', 'progress', 'managing', 'designing', 'survey'];
 
 const SINGLE_QUIZ_TRANSFORM = {
   x: STUDIO_FACES.engaging.x,
